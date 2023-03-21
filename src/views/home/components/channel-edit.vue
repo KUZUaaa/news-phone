@@ -163,9 +163,9 @@ export default {
     }
     /deep/ .van-icon-close{
         position: absolute;
-        right: -4px;
-        top: -4px;
-        font-size: 7px;
+        right: -6px;
+        top: -6px;
+        font-size: 17px;
         z-index: 2;
     }
     .tuijian{
