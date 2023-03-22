@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "iconfont";
+  /* Project id 3664355 */
+  src: url('//at.alicdn.com/t/c/font_3664355_2olgyqul6wo.woff2?t=1664434522731') format('woff2'), url('//at.alicdn.com/t/c/font_3664355_2olgyqul6wo.woff?t=1664434522731') format('woff'), url('//at.alicdn.com/t/c/font_3664355_2olgyqul6wo.ttf?t=1664434522731') format('truetype');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-dianzan:before {
+  content: "\e608";
+}
+.icon-guanbi:before {
+  content: "\e609";
+}
+.icon-pinglun:before {
+  content: "\e60a";
+}
+.icon-fenxiang:before {
+  content: "\e60b";
+}
+.icon-lishi:before {
+  content: "\e60c";
+}
+.icon-shanchu:before {
+  content: "\e60d";
+}
+.icon-shipin:before {
+  content: "\e60e";
+}
+.icon-shouye:before {
+  content: "\e60f";
+}
+.icon-shoucang:before {
+  content: "\e610";
+}
+.icon-shouji:before {
+  content: "\e611";
+}
+.icon-yanzhengma:before {
+  content: "\e612";
+}
+.icon-wode:before {
+  content: "\e613";
+}
+.icon-sousuo:before {
+  content: "\e614";
+}
+.icon-zuojiantou:before {
+  content: "\e615";
+}
+.icon-youjiantou:before {
+  content: "\e616";
+}
+.icon-wenda:before {
+  content: "\e617";
+}
+.icon-wuwangluo:before {
+  content: "\e618";
+}
+.icon-yuedu:before {
+  content: "\e619";
+}
+.icon-zuopin:before {
+  content: "\e61a";
+}
+.icon-gengduo:before {
+  content: "\e61b";
+}
+.icon-dianzan2:before {
+  content: "\e61c";
+}
+.icon-add:before {
+  content: "\e601";
+}
+.icon-delete:before {
+  content: "\e602";
+}
+.icon-cancle:before {
+  content: "\e603";
+}
+.icon-time:before {
+  content: "\e604";
+}
+.icon-preview:before {
+  content: "\e605";
+}
+.icon-edit:before {
+  content: "\e606";
+}
+.icon-share:before {
+  content: "\e607";
+}
+body {
+  background-color: #f5f7f9;
+}
+.page-nav-bar {
+  background-color: #3296fa;
+}
+.page-nav-bar .van-nav-bar__title {
+  color: #fff;
+}
+.page-nav-bar .van {
+  color: #fff;
+}

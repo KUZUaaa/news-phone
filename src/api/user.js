@@ -12,7 +12,7 @@ export const login = (data) => {
 
 // 发送验证码
 
-export const sendSms = mobile =>{
+export const sendSms = mobile => {
     return request({
         url: `/v1_0/sms/codes/${mobile}`,
         method: 'get'
@@ -21,25 +21,46 @@ export const sendSms = mobile =>{
 
 // 用户信息
 
-export const getUserInfo = () =>{
-    return request({
-        url: `/v1_0/user`,
-        method: 'get'
-        // 写在请求拦截器里
-        // headers:{
-        //     Authorization: `Bearer ${store.state.user.token}`
-        // }
-    })
-}
-// 用户频道列表信息
+export const getUserInfo = () => {
+        return request({
+            url: `/v1_0/user`,
+            method: 'get'
+                // 写在请求拦截器里
+                // headers:{
+                //     Authorization: `Bearer ${store.state.user.token}`
+                // }
+        })
+    }
+    // 用户频道列表信息
 
-export const getUserChannels = () =>{
+export const getUserChannels = () => {
     return request({
         url: `/v1_0/user/channels`,
         method: 'get'
-        // 写在请求拦截器里
-        // headers:{
-        //     Authorization: `Bearer ${store.state.user.token}`
-        // }
+            // 写在请求拦截器里
+            // headers:{
+            //     Authorization: `Bearer ${store.state.user.token}`
+            // }
+    })
+}
+
+// 关注用户
+
+export const addFollow = (target) => {
+    return request({
+        url: `/v1_0/user/followings`,
+        method: 'POST',
+        data: {
+            target
+        }
+    })
+}
+
+// 取消关注用户
+
+export const deleteFollow = (target) => {
+    return request({
+        url: `/v1_0/user/followings/${target}`,
+        method: 'DELETE',
     })
 }
