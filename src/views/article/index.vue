@@ -229,6 +229,7 @@
     .loading-wrap {
       padding: 100px 16px;
       display: flex;
+      display: -webkit-flex;
       align-items: center;
       justify-content: center;
       background-color: #fff;
@@ -236,8 +237,10 @@
   
     .error-wrap {
       padding: 100px 16px;
+      display: -webkit-flex;
       display: flex;
       flex-direction: column;
+      -webkit-flex-direction: column;
       align-items: center;
       justify-content: center;
       background-color: #fff;
@@ -265,6 +268,7 @@
       left: 0;
       right: 0;
       bottom: 0;
+      display: -webkit-flex;
       display: flex;
       justify-content: space-around;
       align-items: center;
