@@ -51,8 +51,23 @@
           v-html="article.content"
           ref="article-content"></div>
           <van-divider>正文结束</van-divider>
-            <!-- 底部区域 -->
-          <div class="article-bottom">
+            
+        </div>
+        <!-- /加载完成-文章详情 -->
+  
+        <!-- 加载失败 -->
+        <div class="error-wrap" v-else-if="errStatus == 404">
+          <van-icon name="failure" />
+          <p class="text">该资源不存在或已删除！</p>
+        </div>
+        <div class="error-wrap" v-else>
+          <van-icon name="failure" />
+          <p class="text">内容加载失败！</p>
+          <van-button class="retry-btn">点击重试</van-button>
+        </div>
+        <!-- 加载失败 --> 
+        <!-- 底部区域 -->
+        <div class="article-bottom">
             <van-button
               class="comment-btn"
               type="default"
@@ -79,20 +94,6 @@
             <van-button class="btn-item" icon="share" ></van-button>
           </div>
           <!-- /底部区域 -->
-        </div>
-        <!-- /加载完成-文章详情 -->
-  
-        <!-- 加载失败 -->
-        <div class="error-wrap" v-else-if="errStatus == 404">
-          <van-icon name="failure" />
-          <p class="text">该资源不存在或已删除！</p>
-        </div>
-        <div class="error-wrap" v-else>
-          <van-icon name="failure" />
-          <p class="text">内容加载失败！</p>
-          <van-button class="retry-btn">点击重试</van-button>
-        </div>
-        <!-- 加载失败 --> 
       </div>
     </div>
   </template>
@@ -187,12 +188,6 @@
       background-color: #fff;
     }
     .article-detail {
-      overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    box-sizing: border-box;
-    height: 100%;
-    position: relative;
-    z-index: 1;
       .article-title {
         font-size: 20px;
         padding: 25px 16px;
@@ -272,9 +267,9 @@
   
     .article-bottom {
       position: fixed;
-	bottom: 0;
-	width: 100%;
-	z-index: 99;
+      bottom: 0;
+      width: 100%;
+      z-index: 99;
       display: -webkit-flex;
       display: flex;
       justify-content: space-around;
