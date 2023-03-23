@@ -14,9 +14,11 @@ const routes = [{
         redirect: '/home',
         component: () =>
             import ('@/views/layout'),
+
         children: [{
             path: '/home', //默认子路由 
             name: 'home',
+            meta: { keepAlive: true },
             component: () =>
                 import ('@/views/home')
         }, {

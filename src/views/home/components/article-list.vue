@@ -1,5 +1,5 @@
 <template>
-    <div class="article-list">
+    <div class="article-list" ref="articleListRef">
         <van-pull-refresh v-model="isreFlashLoading" @refresh="onRefresh">
             <van-list
             v-model="loading"
@@ -49,11 +49,18 @@ export default {
             timestamp: null, //请求获取下一页数据
             error:false,//加载失败判断
             isreFlashLoading: false,//下拉刷新的状态控制
+            scrollTop: 0,
         };
     },
-
+    activated(){
+        this.$refs.articleListRef.scrollTop = this.scrollTop
+    },
     mounted() {
-        
+        const artListDom = this.$refs.articleListRef
+    // 当其滚动时，记录滚动后的top位置
+    artListDom.addEventListener('scroll', () => {
+      this.scrollTop = artListDom.scrollTop
+    })
     },
 
     methods: {

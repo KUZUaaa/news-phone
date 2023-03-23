@@ -33,14 +33,14 @@ export default {
     methods: {
         async onClick(){
             try{
-            if(this.value){
+            if(this.value==1){
               await deleteLike(this.articleId)
               this.$emit('input',0)
             }else{
               await addLike(this.articleId)
               this.$emit('input',1)
             }
-            this.$toast(this.value?'取消点赞':'点赞成功')
+            this.$toast(this.value==1?'取消点赞':'点赞成功')
           }catch(e){
             this.$toast('点赞或取消点赞失败')
           } 

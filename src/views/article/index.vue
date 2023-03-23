@@ -3,9 +3,13 @@
       <!-- 导航栏 -->
       <van-nav-bar
         class="page-nav-bar"
-        left-arrow
+        
         title="新闻头条"
-      ></van-nav-bar>
+      >
+        <van-button slot="left" to="/home" class="backBtn">
+          <van-icon name="arrow-left" />
+        </van-button>
+      </van-nav-bar>
       <!-- /导航栏 -->
   
       <div class="main-wrap">
@@ -51,7 +55,55 @@
           v-html="article.content"
           ref="article-content"></div>
           <van-divider>正文结束</van-divider>
-            
+          <h5>评论</h5>
+            <!-- 文章评论 -->
+            <comment-list
+            :list="commentList"
+            :source="article.art_id"
+            @reply-click="onReplyclick"
+            @onloadSuccess="totalCommentCount = $event.total_count"/>
+            <!-- /文章评论 -->
+
+            <!-- 底部区域 -->
+            <div class="article-bottom">
+              <van-button
+                class="comment-btn"
+                type="default"
+                round
+                size="small"
+                @click="isPostShow = true"
+              >写评论</van-button>
+              <van-button
+                class="btn-item"
+              >
+                  <van-icon name="chat-o" slot="icon" :info="totalCommentCount"></van-icon>
+              </van-button>
+              <!-- 收藏 -->
+              <collect-article
+              class="btn-item"
+              v-model="article.is_collected"
+              :articleId="article.art_id"
+              />
+              <!-- 点赞 -->
+              <like-article
+              class="btn-item"
+              v-model="article.attitude"
+              :articleId="article.art_id"
+              />
+              <van-button class="btn-item" icon="share" ></van-button>
+            </div>
+            <!-- /底部区域 -->
+
+            <!-- 评论弹出层 -->
+            <van-popup 
+            v-model="isPostShow" 
+            position="bottom" 
+             >
+            <comment-post
+            :target="article.art_id"
+            @postSuccess="onPostSuccess"/>
+            </van-popup>
+            <!-- /评论弹出层 -->
         </div>
         <!-- /加载完成-文章详情 -->
   
@@ -66,35 +118,22 @@
           <van-button class="retry-btn">点击重试</van-button>
         </div>
         <!-- 加载失败 --> 
-        <!-- 底部区域 -->
-        <div class="article-bottom">
-            <van-button
-              class="comment-btn"
-              type="default"
-              round
-              size="small"
-            >写评论</van-button>
-            <van-button
-              class="btn-item"
-            >
-                <van-icon name="chat-o" slot="icon" info="123"></van-icon>
-            </van-button>
-            <!-- 收藏 -->
-            <collect-article
-            class="btn-item"
-            v-model="article.is_collected"
-            :articleId="article.art_id"
-            />
-            <!-- 点赞 -->
-            <like-article
-            class="btn-item"
-            v-model="article.attitude"
-            :articleId="article.art_id"
-            />
-            <van-button class="btn-item" icon="share" ></van-button>
-          </div>
-          <!-- /底部区域 -->
+        
       </div>
+
+      <!-- 评论回复 -->
+      <van-popup 
+      v-model="isReplyShow" 
+      position="bottom" 
+      style="height: 90%;"
+      >
+        <comment-reply 
+        v-if="isReplyShow"
+        :comment="currentComment"
+        @close="isReplyShow = false"/>
+      </van-popup>
+      <!-- /评论回复 -->
+
     </div>
   </template>
   
@@ -104,17 +143,28 @@
   import followUser from '@/components/follow-user'
   import collectArticle from '@/components/collect-article'
   import likeArticle from '@/components/like-article'
+  import commentList from './components/comment-list.vue';
+  import commentPost from './components/comment-post.vue';
+  import commentReply from './components/comment-reply.vue';
   export default {
     name: 'ArticleIndex',
     components: {
       followUser,
       collectArticle,
       likeArticle,
+      commentList,
+      commentPost,
+      commentReply,
     },
     props: {
       articleId: {
         type: [Number, String],
         required: true
+      }
+    },
+    provide: function(){
+      return {
+        articleId:this.articleId
       }
     },
     data () {
@@ -124,6 +174,11 @@
         },
         loading:true,
         errStatus: 0,
+        totalCommentCount:0,
+        isPostShow:false,//评论弹出层
+        commentList:[],//评论列表
+        isReplyShow:false,//评论回复弹出层
+        currentComment: {},//当前点击的评论
       }
     },
     computed: {},
@@ -168,7 +223,14 @@
             }
           });
         },
-        
+        onPostSuccess(data){
+          this.isPostShow = false
+          this.commentList.unshift(data.new_obj)
+        },
+        onReplyclick(comments){
+          this.isReplyShow = true
+          this.currentComment = comments
+        }
     }
   }
   </script>
@@ -177,7 +239,14 @@
   @import './github-markdown.css';
   .article-container {
     position: relative;
-    
+   .backBtn{
+    background-color: #3296fa;
+    color: #eeeeee;
+    border: none;
+    .van-icon-arrow-left{
+      color: white;
+    }
+   }
     .main-wrap {
       position: fixed;
       left: 0;
@@ -267,6 +336,8 @@
   
     .article-bottom {
       position: fixed;
+      position: -webkit-fixed;
+      // position: absolute;
       bottom: 0;
       width: 100%;
       z-index: 99;
