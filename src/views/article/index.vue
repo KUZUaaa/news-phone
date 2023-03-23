@@ -175,6 +175,7 @@
   <style scoped lang="less">
   @import './github-markdown.css';
   .article-container {
+    position: relative;
     
     .main-wrap {
       position: fixed;
@@ -186,6 +187,12 @@
       background-color: #fff;
     }
     .article-detail {
+      overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    height: 100%;
+    position: relative;
+    z-index: 1;
       .article-title {
         font-size: 20px;
         padding: 25px 16px;
@@ -265,9 +272,9 @@
   
     .article-bottom {
       position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 99;
       display: -webkit-flex;
       display: flex;
       justify-content: space-around;
@@ -293,7 +300,6 @@
       }
 
       .btn-item{
-        margin: 0;
         border: none;
       }
     }
