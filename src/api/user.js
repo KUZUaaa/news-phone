@@ -22,16 +22,17 @@ export const sendSms = mobile => {
 // 用户信息
 
 export const getUserInfo = () => {
-        return request({
-            url: `/v1_0/user`,
-            method: 'get'
-                // 写在请求拦截器里
-                // headers:{
-                //     Authorization: `Bearer ${store.state.user.token}`
-                // }
-        })
-    }
-    // 用户频道列表信息
+    return request({
+        url: `/v1_0/user`,
+        method: 'get'
+            // 写在请求拦截器里
+            // headers:{
+            //     Authorization: `Bearer ${store.state.user.token}`
+            // }
+    })
+}
+
+// 用户频道列表信息
 
 export const getUserChannels = () => {
     return request({
@@ -62,5 +63,34 @@ export const deleteFollow = (target) => {
     return request({
         url: `/v1_0/user/followings/${target}`,
         method: 'DELETE',
+    })
+}
+
+// 获取当前用户个人资料
+
+export const getUserProfile = (target) => {
+    return request({
+        url: `/v1_0/user/profile`,
+        method: 'GET',
+    })
+}
+
+// 编辑用户个人资料
+
+export const updataUserProfile = (data) => {
+    return request({
+        url: `/v1_0/user/profile`,
+        method: 'PATCH',
+        data
+    })
+}
+
+// 编辑用户个人资料Image
+
+export const updataUserProfileImage = (data) => {
+    return request({
+        url: `/v1_0/user/photo`,
+        method: 'PATCH',
+        data
     })
 }

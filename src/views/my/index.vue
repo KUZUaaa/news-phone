@@ -25,7 +25,8 @@
                 <div class="right">
                     <van-button
                     round
-                    class="bjBtn">
+                    class="bjBtn"
+                    to="/user/profile">
                       编辑资料
                     </van-button>   
                 </div>
