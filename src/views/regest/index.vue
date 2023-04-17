@@ -1,14 +1,32 @@
 <template>
     <div class="login-container">
         <!-- 导航栏 -->
-        <van-nav-bar class="page-nav-bar" title="登陆">
-          <van-icon slot="left" name="cross" class="van" @click="$router.push('/my')"></van-icon>
+        <van-nav-bar class="page-nav-bar" title="注册">
+          <van-icon slot="left" name="cross" class="van" @click="$router.push('/login')"></van-icon>
         </van-nav-bar>
 
         <!-- 导航栏 -->
         <!-- 用户名密码表单 -->
         <!-- rules表单验证，提交时触发验证，如果验证不通过不会submit -->
         <van-form ref="loginForm" @submit="onSubmit">
+          <van-field
+              v-model.trim="user.name"
+              name="name"
+              placeholder="请输入用户名"
+              :rules="userFormRules.name"
+              type="text"
+            >
+            <van-icon name="user-circle-o" slot="left-icon"/>
+            </van-field>
+          <van-field
+              v-model.trim="user.password"
+              name="password"
+              placeholder="请输入密码"
+              :rules="userFormRules.password"
+              type="password"
+            >
+            <van-icon name="closed-eye" slot="left-icon"/>
+            </van-field>
             <van-field
               v-model="user.mobile"
               name="mobile"
@@ -43,33 +61,36 @@
             </template>
             </van-field>
             <div class="submit-sms-btn">
-              <van-button  block type="info" native-type="submit" class="login-btn">登陆</van-button>
+              <van-button  block type="info" native-type="submit" class="login-btn">注册</van-button>
             </div>
         </van-form>
         <!-- 用户名密码表单 -->
-        <!-- 注册 -->
-        <div class="regest" >
-            <span class="text" @click="$router.push('/regest')">注册</span>
-            <span class="textpic">/</span>
-            <span class="text" @click="$router.push('/loginbypw')">密码登录</span>
-        </div>
-        <!-- /注册 -->
     </div>
 </template>
 
 <script>
 import { login, sendSms } from '@/api/user'
 export default {
-  name: 'LoginIndex',
+  name: 'regest',
   components: {},
   props: {},
   data () {
     return {
         user:{
+          name: '',//用户名
+          password:'',//密码
           mobile: '',//手机号
           code: '',//验证码
         },
         userFormRules:{
+          name:[{ 
+            required: true, 
+            // message: '用户名不能为空'
+          }],
+          password:[{ 
+            required: true, 
+            // message: '密码不能为空'
+          }],
           mobile:[{ 
             required: true, 
             // message: '手机号不能为空'

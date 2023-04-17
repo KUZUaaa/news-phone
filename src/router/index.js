@@ -10,6 +10,18 @@ const routes = [{
             import ('@/views/login')
     },
     {
+        path: '/loginbypw',
+        name: 'loginbypw',
+        component: () =>
+            import ('@/views/loginbypw')
+    },
+    {
+        path: '/regest',
+        name: 'regest',
+        component: () =>
+            import ('@/views/regest/index.vue')
+    },
+    {
         path: '/',
         redirect: '/home',
         component: () =>
@@ -26,16 +38,6 @@ const routes = [{
             name: 'my',
             component: () =>
                 import ('@/views/my')
-        }, {
-            path: '/qa',
-            name: 'qa',
-            component: () =>
-                import ('@/views/qa')
-        }, {
-            path: '/video',
-            name: 'video',
-            component: () =>
-                import ('@/views/video')
         }, ]
     },
     {

@@ -20,27 +20,13 @@
             <i slot="left-icon" class="iconfont icon-shouji"></i>
             </van-field>
             <van-field
-              v-model="user.code"
-              name="code"
-              placeholder="请输入验证码"
-              :rules="userFormRules.code"
-              type="number"
-              maxlength="6"
+              v-model.trim="user.password"
+              name="password"
+              placeholder="请输入密码"
+              :rules="userFormRules.password"
+              type="password"
             >
-            <i slot="left-icon" class="iconfont icon-yanzhengma"></i>
-            <template #button>
-              <!-- time倒计时时间 -->
-              <van-count-down :time="60000" format="ss s" v-if="isCountDownShow" @finish="isCountDownShow=false"/>
-              <van-button 
-              v-if="!isCountDownShow"
-                native-type="button"
-                round size="small" 
-                type="default" 
-                class="send-sms-btn"
-                @click="onSendSms">
-                获取验证码
-              </van-button>
-            </template>
+            <van-icon name="closed-eye" slot="left-icon"/>
             </van-field>
             <div class="submit-sms-btn">
               <van-button  block type="info" native-type="submit" class="login-btn">登陆</van-button>
@@ -51,7 +37,7 @@
         <div class="regest" >
             <span class="text" @click="$router.push('/regest')">注册</span>
             <span class="textpic">/</span>
-            <span class="text" @click="$router.push('/loginbypw')">密码登录</span>
+            <span class="text" @click="$router.push('/login')">验证码登录</span>
         </div>
         <!-- /注册 -->
     </div>
@@ -60,14 +46,14 @@
 <script>
 import { login, sendSms } from '@/api/user'
 export default {
-  name: 'LoginIndex',
+  name: 'loginbypw',
   components: {},
   props: {},
   data () {
     return {
         user:{
           mobile: '',//手机号
-          code: '',//验证码
+          password: '',//验证码
         },
         userFormRules:{
           mobile:[{ 
@@ -77,15 +63,11 @@ export default {
             pattern:/^1[3|5|7|8|9]\d{9}$/,
             message:'请填写正确的手机号'
           }],
-          code:[{ 
+          password:[{ 
             required: true, 
-            // message: '验证码不能为空' 
-          },{
-            pattern:/^\d{6}$/,
-            message:'请填写正确的验证码'
-          }]
+            // message: '密码不能为空'
+          }],
         },
-        isCountDownShow: false //是否展示倒计时
     };
   },
   computed: {},
@@ -113,33 +95,13 @@ export default {
       }
       catch (err) {
         if(err.response.status === 400){
-            this.$toast.fail('手机号或验证码错误')
+            this.$toast.fail('手机号或密码错误')
         }else{
             console.log('登陆失败',err);
             this.$toast.fail('请稍后重试')
         }
         
       }
-    },
-    async onSendSms (){
-      // 点击验证码手机号验证格式
-      try{
-        await this.$refs.loginForm.validate('mobile')
-      }catch(err){
-        console.log('验证失败',err);
-        return
-      }
-      this.isCountDownShow=true
-      // 请求验证码
-      try{
-        await sendSms(this.user.mobile)
-        this.$toast('发送成功')
-      }catch{
-        console.log('发送失败',err);
-        this.$toast('发送失败')
-        this.isCountDownShow=false
-      }
-
     },
   }
 }
@@ -172,7 +134,7 @@ export default {
     .regest{
       position: absolute;
       bottom: 10px;
-      margin: 0 137px;
+      margin: 0 130px;
       .text{
         font-size: 15px;
         color: #258af0;

@@ -4,7 +4,7 @@
         <div class="header not-login" v-if="!user">
             <div class="login-btn" @click="$router.push('/login')">
                 <img src="@/assets/mobile.png" class="mobile-img">
-                <span class="text">登陆 / 注册</span>
+                <span class="text">登录</span>
             </div>
         </div>
 
