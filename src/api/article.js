@@ -1,13 +1,11 @@
-// 文章列表
-
+// 文章列表 已完成
 import request from "@/utils/request";
-
 
 // 获取文章列表数据
 export const getArticle = (params) => {
     return request({
         method: 'GET',
-        url: '/v1_0/articles',
+        url: '/api/articles',
         params
     })
 }

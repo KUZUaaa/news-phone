@@ -1,20 +1,40 @@
-// 用户相关请求模块
+// 用户相关请求模块 差一个编辑用户头像
 // 接口文档 http://toutiao.itheima.net/api.html#
 import request from '@/utils/request'
 
+// 验证码登录
 export const login = (data) => {
     return request({
         method: 'POST',
-        url: '/v1_0/authorizations',
+        url: '/api/authorizationsBycode',
+        data
+    })
+}
+
+//密码登录
+export const loginByPw = (data) => {
+    return request({
+        method: 'POST',
+        url: '/api/authorizations',
+        data
+    })
+}
+
+//注册
+export const regest = (data) => {
+    return request({
+        method: 'POST',
+        url: '/api/regester',
         data
     })
 }
 
 // 发送验证码
 
-export const sendSms = mobile => {
+export const sendSms = () => {
     return request({
-        url: `/v1_0/sms/codes/${mobile}`,
+        // url: `/v1_0/sms/codes/${mobile}`,
+        url: `/api/sms/codes`,
         method: 'get'
     })
 }

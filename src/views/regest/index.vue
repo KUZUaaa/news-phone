@@ -37,7 +37,7 @@
             >
             <i slot="left-icon" class="iconfont icon-shouji"></i>
             </van-field>
-            <van-field
+            <!-- <van-field
               v-model="user.code"
               name="code"
               placeholder="请输入验证码"
@@ -47,7 +47,7 @@
             >
             <i slot="left-icon" class="iconfont icon-yanzhengma"></i>
             <template #button>
-              <!-- time倒计时时间 -->
+              time倒计时时间
               <van-count-down :time="60000" format="ss s" v-if="isCountDownShow" @finish="isCountDownShow=false"/>
               <van-button 
               v-if="!isCountDownShow"
@@ -59,7 +59,7 @@
                 获取验证码
               </van-button>
             </template>
-            </van-field>
+            </van-field> -->
             <div class="submit-sms-btn">
               <van-button  block type="info" native-type="submit" class="login-btn">注册</van-button>
             </div>
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { login, sendSms } from '@/api/user'
+import { regest, sendSms } from '@/api/user'
 export default {
   name: 'regest',
   components: {},
@@ -80,7 +80,7 @@ export default {
           name: '',//用户名
           password:'',//密码
           mobile: '',//手机号
-          code: '',//验证码
+          // code: '',//验证码
         },
         userFormRules:{
           name:[{ 
@@ -98,13 +98,13 @@ export default {
             pattern:/^1[3|5|7|8|9]\d{9}$/,
             message:'请填写正确的手机号'
           }],
-          code:[{ 
-            required: true, 
-            // message: '验证码不能为空' 
-          },{
-            pattern:/^\d{6}$/,
-            message:'请填写正确的验证码'
-          }]
+          // code:[{ 
+          //   required: true, 
+          //   // message: '验证码不能为空' 
+          // },{
+          //   pattern:/^\d{4}$/,
+          //   message:'请填写正确的验证码'
+          // }]
         },
         isCountDownShow: false //是否展示倒计时
     };
@@ -126,15 +126,13 @@ export default {
       });
 
       try {
-        const { data } = await login(user)
-        console.log('登陆成功',data);
-        this.$toast.success('登陆成功')
-        this.$store.commit('setUser',data.data)
-        this.$router.push('/home')
+        const { data } = await regest(user)
+        this.$toast.success('注册成功')
+        this.$router.push('/login')
       }
       catch (err) {
         if(err.response.status === 400){
-            this.$toast.fail('手机号或验证码错误')
+            this.$toast.fail('注册失败，手机号重复')
         }else{
             console.log('登陆失败',err);
             this.$toast.fail('请稍后重试')

@@ -3,6 +3,7 @@
         <!-- 导航栏 -->
         <van-nav-bar class="page-nav-bar" title="登陆">
           <van-icon slot="left" name="cross" class="van" @click="$router.push('/my')"></van-icon>
+          <span slot="right" class="text" @click="$router.push('/login')">验证码登录</span>
         </van-nav-bar>
 
         <!-- 导航栏 -->
@@ -29,22 +30,16 @@
             <van-icon name="closed-eye" slot="left-icon"/>
             </van-field>
             <div class="submit-sms-btn">
+              <van-button  block type="info" native-type="button" @click="$router.push('/regest')" class="regest-btn">注册</van-button>
               <van-button  block type="info" native-type="submit" class="login-btn">登陆</van-button>
             </div>
         </van-form>
         <!-- 用户名密码表单 -->
-        <!-- 注册 -->
-        <div class="regest" >
-            <span class="text" @click="$router.push('/regest')">注册</span>
-            <span class="textpic">/</span>
-            <span class="text" @click="$router.push('/login')">验证码登录</span>
-        </div>
-        <!-- /注册 -->
     </div>
 </template>
 
 <script>
-import { login, sendSms } from '@/api/user'
+import { loginByPw } from '@/api/user'
 export default {
   name: 'loginbypw',
   components: {},
@@ -87,11 +82,14 @@ export default {
       });
 
       try {
-        const { data } = await login(user)
-        console.log('登陆成功',data);
+        const { data } = await loginByPw(user)
+        if(data.status === 400){
+          this.$toast.fail('手机号或密码错误')
+        }else{
         this.$toast.success('登陆成功')
         this.$store.commit('setUser',data.data)
         this.$router.push('/home')
+        }
       }
       catch (err) {
         if(err.response.status === 400){
@@ -124,27 +122,26 @@ export default {
         color: #666;
     }
     .submit-sms-btn{
+      display: flex;
         padding: 5px;
         padding-top: 10px;
         .login-btn {
-            background-color: #6db4fb;
+            // background-color: #6db4fb;
             border: none;
+            margin: 10px;
+        }
+        .regest-btn{
+          margin: 10px;
+          color: #6db4fb;
+          background-color: white;
+          border: 1px solid #6db4fb;
         }
     }
-    .regest{
-      position: absolute;
-      bottom: 10px;
-      margin: 0 130px;
-      .text{
-        font-size: 15px;
-        color: #258af0;
-        border-bottom: 1px solid #258af0;
+    .text{
+        font-size: 12px;
+        color: white;
+
       }
-      .textpic{
-        font-size: 15px;
-        color: #258af0;
-      }
-    }
 }
 
 </style>

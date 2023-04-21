@@ -5,7 +5,7 @@
     >
         <div slot="title" class="title van-multi-ellipsis--l2">{{article.title}}</div>
         <div slot="label">
-            <div v-if="article.cover.type === 3" class="cover-wrap">
+            <div v-if="article.cover.type == 3" class="cover-wrap">
                 <div 
                 class="cover-item" 
                 v-for="(img,index) in article.cover.images"
@@ -24,7 +24,7 @@
             </div>
         </div>
         <van-image
-        v-if="article.cover.type === 1"
+        v-if="article.cover.type == 1"
         class="right-cover"
         slot="default"
         :src="article.cover.images[0]"

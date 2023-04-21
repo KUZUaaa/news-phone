@@ -47,6 +47,7 @@ export default {
             this.cropper.getCroppedCanvas().toBlob( async (blob) => {
                 const formData = new FormData()
                 formData.append('photo',blob)
+                console.log(blob)
                 const {data} = await updataUserProfileImage(formData)
                 console.log(data);
                 this.$emit('close');

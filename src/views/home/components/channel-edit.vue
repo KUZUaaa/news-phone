@@ -40,7 +40,7 @@ export default {
         return {
             allChannels:[],//所有频道
             isEdit:false,//编辑与完成切换
-            fiexChannels:[0],//不给删除的频道
+            fiexChannels:[1],//不给删除的频道
         };
     },
     created() {

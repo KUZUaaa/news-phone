@@ -49,8 +49,15 @@ export default {
               await deleteFollow(this.userId)
               this.$emit('updataIsFollowed',false)
             }else{
-              await addFollow(this.userId)
-              this.$emit('updataIsFollowed',true)
+              const {data} = await addFollow(this.userId)
+              if(data.status ==400){
+                this.$toast('不能关注自己哦')
+                // this.$toast('关注失败')
+                return
+              }else{
+                this.$emit('updataIsFollowed',true)
+              }
+
             }
           }catch(e){
             if(this.errStatus.response && this.errStatus.response.status === 400)

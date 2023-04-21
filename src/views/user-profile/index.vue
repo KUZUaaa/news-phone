@@ -26,7 +26,7 @@
             ></van-image>
         </van-cell>
         <van-cell title="昵称" :value="user.name" is-link @click="isUpdataName=true"/>
-        <van-cell title="性别" :value="user.gender===0?'男':'女'" is-link @click="isUpdataGender=true"/>
+        <van-cell title="性别" :value="user.gender==0?'男':'女'" is-link @click="isUpdataGender=true"/>
         <van-cell title="生日" :value="user.birthday" is-link @click="isUpdataBirthday=true"/>
         <!-- 个人信息 -->
 
@@ -113,6 +113,7 @@ export default {
         // 图片预览
         onFileChange(){
             const file = this.$refs.file.files[0]
+            console.log(file)
             this.img = window.URL.createObjectURL(file)
             this.isUpdataPhoto = true
             this.$refs.file.value = '' //用同一个文件时清空value 不然无法触发change事件

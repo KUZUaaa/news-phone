@@ -7,7 +7,7 @@
         @load="onLoad"
         :error.sync="error"
         >
-            <van-cell v-for="(item,index) in list" :key="index" :title="item.title" />
+            <van-cell v-for="(item,index) in list" :key="index" :title="item.title" :to="`/article/${item.art_id}`"/>
         </van-list>
     </div>
 </template>

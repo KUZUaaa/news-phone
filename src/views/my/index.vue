@@ -65,7 +65,6 @@
 
         <!-- 列表 -->
         <van-cell title="消息通知" is-link class="cell-msg"/>
-        <van-cell title="小智同学" is-link class="cell-ai"/>
         <van-cell title="退出登陆" class="btn-logout" v-if="user" @click="onlogout" clickable/>
 
     </div>

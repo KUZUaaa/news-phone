@@ -1,14 +1,15 @@
-// 频道列表
+// 频道列表 已完成
 import request from "@/utils/request";
 
 // 所有频道列表
 export const getAllChannels = () => {
-        return request({
-            method: 'GET',
-            url: '/v1_0/channels'
-        })
-    }
-    // 添加用户频道
+    return request({
+        method: 'GET',
+        url: '/api/channels'
+    })
+}
+
+// 添加用户频道
 export const addUserChannels = (channel) => {
         return request({
             method: 'PATCH',
