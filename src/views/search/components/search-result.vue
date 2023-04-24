@@ -3,7 +3,7 @@
         <van-list
         v-model="loading"
         :finished="finished"
-        finished-text="没有更多了"
+        :finished-text="this.$t('my.没有更多了')"
         @load="onLoad"
         :error.sync="error"
         >

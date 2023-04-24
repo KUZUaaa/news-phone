@@ -1,7 +1,7 @@
 <template>
     <div class="login-container">
         <!-- 导航栏 -->
-        <van-nav-bar class="page-nav-bar" title="注册">
+        <van-nav-bar class="page-nav-bar" :title="this.$t('login.注册')">
           <van-icon slot="left" name="cross" class="van" @click="$router.push('/login')"></van-icon>
         </van-nav-bar>
 
@@ -12,7 +12,7 @@
           <van-field
               v-model.trim="user.name"
               name="name"
-              placeholder="请输入用户名"
+              :placeholder="this.$t('login.请输入用户名')"
               :rules="userFormRules.name"
               type="text"
             >
@@ -21,7 +21,7 @@
           <van-field
               v-model.trim="user.password"
               name="password"
-              placeholder="请输入密码"
+              :placeholder="this.$t('login.请输入密码')"
               :rules="userFormRules.password"
               type="password"
             >
@@ -30,7 +30,7 @@
             <van-field
               v-model="user.mobile"
               name="mobile"
-              placeholder="请输入手机号"
+              :placeholder="this.$t('login.请输入手机号')"
               :rules="userFormRules.mobile"
               type="number"
               maxlength="11"
@@ -61,7 +61,7 @@
             </template>
             </van-field> -->
             <div class="submit-sms-btn">
-              <van-button  block type="info" native-type="submit" class="login-btn">注册</van-button>
+              <van-button  block type="info" native-type="submit" class="login-btn">{{$t('login.注册')}}</van-button>
             </div>
         </van-form>
         <!-- 用户名密码表单 -->
@@ -96,7 +96,7 @@ export default {
             // message: '手机号不能为空'
           },{
             pattern:/^1[3|5|7|8|9]\d{9}$/,
-            message:'请填写正确的手机号'
+            message:this.$t('login.请填写正确的手机号')
           }],
           // code:[{ 
           //   required: true, 
@@ -127,15 +127,14 @@ export default {
 
       try {
         const { data } = await regest(user)
-        this.$toast.success('注册成功')
+        this.$toast.success(this.$t('login.注册成功'))
         this.$router.push('/login')
       }
       catch (err) {
         if(err.response.status === 400){
-            this.$toast.fail('注册失败，手机号重复')
+            this.$toast.fail(this.$t('login.注册失败，手机号重复'))
         }else{
-            console.log('登陆失败',err);
-            this.$toast.fail('请稍后重试')
+            this.$toast.fail(this.$t('login.请稍后重试'))
         }
         
       }
@@ -145,17 +144,15 @@ export default {
       try{
         await this.$refs.loginForm.validate('mobile')
       }catch(err){
-        console.log('验证失败',err);
         return
       }
       this.isCountDownShow=true
       // 请求验证码
       try{
         await sendSms(this.user.mobile)
-        this.$toast('发送成功')
+        this.$toast(this.$t('login.发送成功'))
       }catch{
-        console.log('发送失败',err);
-        this.$toast('发送失败')
+        this.$toast(this.$t('login.发送失败'))
         this.isCountDownShow=false
       }
 

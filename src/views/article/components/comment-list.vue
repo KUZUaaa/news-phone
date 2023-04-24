@@ -3,7 +3,7 @@
         <van-list
         v-model="loading"
         :finished="finished"
-        finished-text="没有更多了"
+        :finished-text="this.$t('my.没有更多了')"
         @load="onLoad"
         :immediate-check="false"
         >
@@ -71,7 +71,7 @@ export default {
                     this.finished= true
                 }
             }catch(e){
-                this.$toast('获取文章评论失败，请稍后重试')
+                this.$toast(this.$t('my.获取文章评论失败，请稍后重试'))
             }
         },
     },

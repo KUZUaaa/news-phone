@@ -10,7 +10,7 @@
       round
       icon="search"
       to="/search"
-      >搜索</van-button>
+      >{{$t('my.搜索')}}</van-button>
     </van-nav-bar>
     <!-- 导航栏 -->
     <!-- tab栏 -->
@@ -87,7 +87,7 @@ export default {
         }
         this.channels =channels
       }catch(err){
-        this.$toast('获取用户频道列表失败')
+        this.$toast(this.$t('my.获取推荐列表失败，请稍后重试'))
       }
     },
     updataActive(index, isChannelEditShow ){

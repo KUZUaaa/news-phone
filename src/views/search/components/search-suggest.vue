@@ -49,7 +49,7 @@ export default {
                 const {data} = await getSearchSuggest(val)
                 this.suggestions = data.data.options
             }catch (e){
-                this.$toast('获取推荐列表失败，请稍后重试')
+                this.$toast(this.$t('my.获取推荐列表失败，请稍后重试'))
             }
         },
         highlight(text){

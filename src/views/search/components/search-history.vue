@@ -1,9 +1,9 @@
 <template>
     <div class="search-history">
-        <van-cell title="搜索历史">
+        <van-cell :title="this.$t('my.搜索历史')">
             <div v-if="isDeleteShow">
-                <span @click="$emit('updataSearchHistory'),isDeleteShow=false">全部删除  </span>
-                <span @click="isDeleteShow=false">完成</span>
+                <span @click="$emit('updataSearchHistory'),isDeleteShow=false">{{$t('my.全部删除')  }}</span>
+                <span @click="isDeleteShow=false">/{{$t('my.完成')}}</span>
             </div>
             <van-icon v-else name="delete" @click="isDeleteShow=true"/>
         </van-cell>

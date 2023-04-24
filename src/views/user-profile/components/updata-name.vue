@@ -1,9 +1,9 @@
 <template>
     <div class="updata-name">
         <van-nav-bar class="page-nav-bar"
-        title="设置昵称">
+        :title="this.$t('my.设置昵称')">
             <van-button class="backBtn" slot="left" @click="$emit('close')" icon="arrow-left"></van-button>
-            <van-button class="backBtn" slot="right" @click="onUpdataName">完成</van-button>
+            <van-button class="backBtn" slot="right" @click="onUpdataName">{{$t('my.完成')}}</van-button>
         </van-nav-bar>
 
         <van-field
@@ -12,7 +12,7 @@
             autosize
             type="textarea"
             maxlength="11"
-            placeholder="请输入新昵称"
+            :placeholder="this.$t('my.请输入新昵称')"
             show-word-limit
         />
     </div>
@@ -43,7 +43,7 @@ export default {
             try{
                 const newName = this.newName
                 if(!newName.length){
-                    this.$toast('昵称不能为空')
+                    this.$toast(this.$t('my.昵称不能为空'))
                     return
                 }
                 await updataUserProfile({
@@ -51,9 +51,9 @@ export default {
                 })
                 this.$emit('close')
                 this.$emit('input',newName)
-                this.$toast.success('修改成功')
+                this.$toast.success(this.$t('my.修改成功'))
             }catch(e){
-                this.$toast('修改昵称失败')
+                this.$toast(this.$t('my.修改昵称失败'))
             }
         },
     },

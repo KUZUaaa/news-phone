@@ -40,9 +40,9 @@ export default {
               await addCollect(this.articleId)
               this.$emit('input',true)
             }
-            this.$toast(this.value?'取消收藏':'收藏成功')
+            this.$toast(this.value?this.$t('my.取消收藏'):this.$t('my.收藏成功'))
           }catch(e){
-            this.$toast('收藏失败')
+            this.$toast(this.$t('my.收藏失败'))
           } 
         }
     },

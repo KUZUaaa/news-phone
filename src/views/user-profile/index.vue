@@ -2,7 +2,7 @@
     <div class="user-profile">
         <!-- 导航栏 -->
         <van-nav-bar class="page-nav-bar"
-        title="个人信息"
+        :title="this.$t('my.个人信息')"
         left-arrow
         @click-left="$router.back()" />
         <!-- 导航栏 -->
@@ -15,7 +15,7 @@
 
         <!-- 个人信息 -->
         <van-cell 
-        title="头像"
+        :title="this.$t('my.头像')"
         @click="$refs.file.click()"
         >
             <van-image
@@ -25,9 +25,9 @@
             :src="user.photo"
             ></van-image>
         </van-cell>
-        <van-cell title="昵称" :value="user.name" is-link @click="isUpdataName=true"/>
-        <van-cell title="性别" :value="user.gender==0?'男':'女'" is-link @click="isUpdataGender=true"/>
-        <van-cell title="生日" :value="user.birthday" is-link @click="isUpdataBirthday=true"/>
+        <van-cell :title="this.$t('my.昵称')" :value="user.name" is-link @click="isUpdataName=true"/>
+        <van-cell :title="this.$t('my.性别')" :value="user.gender==0?this.$t('my.男'):this.$t('my.女')" is-link @click="isUpdataGender=true"/>
+        <van-cell :title="this.$t('my.生日')" :value="user.birthday" is-link @click="isUpdataBirthday=true"/>
         <!-- 个人信息 -->
 
         <!-- 昵称弹出层 -->
@@ -107,7 +107,7 @@ export default {
                 const {data} = await getUserProfile()
                 this.user = data.data
             }catch(e){
-                this.$toast('获取用户个人信息失败')
+                this.$toast(this.$t('my.获取用户个人信息失败'))
             }
         },
         // 图片预览

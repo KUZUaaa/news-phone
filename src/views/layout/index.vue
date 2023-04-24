@@ -7,11 +7,11 @@
     <van-tabbar class="layout-tabbar" route >
       <van-tabbar-item to="/home" > 
         <i slot="icon" class="iconfont icon-shouye"></i>
-        <span class="text">首页</span> 
+        <span class="text">{{$t('my.首页')}}</span> 
       </van-tabbar-item>
       <van-tabbar-item to="/my">
         <i slot="icon" class="iconfont icon-wode"></i>
-        <span class="text">{{$store.state.user? '我的':'未登录'}}</span> 
+        <span class="text">{{$store.state.user? this.$t('my.我的'):this.$t('my.未登录')}}</span> 
       </van-tabbar-item>
     </van-tabbar>
   </div>

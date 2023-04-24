@@ -4,7 +4,7 @@
       <van-nav-bar
         class="page-nav-bar"
         
-        title="新闻头条"
+        :title="this.$t('my.新闻头条')"
       >
         <van-button slot="left" to="/home" class="backBtn">
           <van-icon name="arrow-left" />
@@ -18,7 +18,7 @@
           <van-loading
             color="#3296fa"
             vertical
-          >加载中</van-loading>
+          >{{$t('my.加载中')}}</van-loading>
         </div>
         <!-- /加载中 -->
   
@@ -54,8 +54,8 @@
           class="article-content markdown-body"
           v-html="article.content"
           ref="article-content"></div>
-          <van-divider>正文结束</van-divider>
-          <h5>评论</h5>
+          <van-divider>{{$t('my.正文结束')}}</van-divider>
+          <h5>{{$t('my.评论')}}</h5>
             <!-- 文章评论 -->
             <comment-list
             :list="commentList"
@@ -72,7 +72,7 @@
                 round
                 size="small"
                 @click="isPostShow = true"
-              >写评论</van-button>
+              >{{$t('my.写评论')}}</van-button>
               <van-button
                 class="btn-item"
               >
@@ -110,12 +110,12 @@
         <!-- 加载失败 -->
         <div class="error-wrap" v-else-if="errStatus == 404">
           <van-icon name="failure" />
-          <p class="text">该资源不存在或已删除！</p>
+          <p class="text">{{$t('my.该资源不存在或已删除！')}}</p>
         </div>
         <div class="error-wrap" v-else>
           <van-icon name="failure" />
-          <p class="text">内容加载失败！</p>
-          <van-button class="retry-btn">点击重试</van-button>
+          <p class="text">{{$t('my.内容加载失败！')}}</p>
+          <van-button class="retry-btn">{{$t('my.点击重试')}}</van-button>
         </div>
         <!-- 加载失败 --> 
         
@@ -193,6 +193,8 @@
             try{
                 const {data} = await getArticleById(this.articleId)
                 this.article = data.data
+                this.article.is_collected=this.article.is_collected? true:false
+                this.article.is_followed=this.article.is_followed?true:false
                 this.loading = false
                 // 图片预览
                 this.$nextTick(()=>{
@@ -204,7 +206,7 @@
             }catch(e){
                 if(e.response&&e.response.status === 404)
                 this.errStatus = 404
-                this.$toast('获取新闻内容失败')
+                this.$toast(this.$t('my.获取新闻内容失败'))
             }
             this.loading = false
         },

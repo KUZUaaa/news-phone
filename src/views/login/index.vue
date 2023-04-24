@@ -1,9 +1,9 @@
 <template>
     <div class="login-container">
         <!-- 导航栏 -->
-        <van-nav-bar class="page-nav-bar" title="登陆">
+        <van-nav-bar class="page-nav-bar" :title="this.$t('my.登录')">
           <van-icon slot="left" name="cross" class="van" @click="$router.push('/my')"></van-icon>
-          <span slot="right" class="text" @click="$router.push('/loginbypw')">密码登录</span>
+          <span slot="right" class="text" @click="$router.push('/loginbypw')">{{$t('login.密码登录')}}</span>
         </van-nav-bar>
 
         <!-- 导航栏 -->
@@ -13,7 +13,7 @@
             <van-field
               v-model="user.mobile"
               name="mobile"
-              placeholder="请输入手机号"
+              :placeholder="this.$t('login.请输入手机号')"
               :rules="userFormRules.mobile"
               type="number"
               maxlength="11"
@@ -23,7 +23,7 @@
             <van-field
               v-model="user.code"
               name="code"
-              placeholder="请输入验证码"
+              :placeholder="this.$t('login.请输入验证码')"
               :rules="userFormRules.code"
               type="number"
               maxlength="6"
@@ -39,13 +39,13 @@
                 type="default" 
                 class="send-sms-btn"
                 @click="onSendSms">
-                获取验证码
+                {{$t('login.获取验证码')}}
               </van-button>
             </template>
             </van-field>
             <div class="submit-sms-btn">
-              <van-button  block type="info" native-type="button" @click="$router.push('/regest')" class="regest-btn">注册</van-button>
-              <van-button  block type="info" native-type="submit" class="login-btn">登陆</van-button>
+              <van-button  block type="info" native-type="button" @click="$router.push('/regest')" class="regest-btn">{{$t('login.注册')}}</van-button>
+              <van-button  block type="info" native-type="submit" class="login-btn">{{$t('my.登录')}}</van-button>
             </div>
         </van-form>
         <!-- 用户名密码表单 -->
@@ -70,14 +70,14 @@ export default {
             // message: '手机号不能为空'
           },{
             pattern:/^1[3|5|7|8|9]\d{9}$/,
-            message:'请填写正确的手机号'
+            message:this.$t('login.请填写正确的手机号')
           }],
           code:[{ 
             required: true, 
             // message: '验证码不能为空' 
           },{
             pattern:/^\d{4}$/,
-            message:'请填写正确的验证码'
+            message:this.$t('login.请填写正确的验证码')
           }]
         },
         isCountDownShow: false //是否展示倒计时
@@ -94,7 +94,7 @@ export default {
       // 加载动画
       this.$toast.loading({
         overlay: true,
-        message: '登陆中...',
+        message: this.$t('login.登陆中...'),
         forbidClick: true,//禁用背景
         duration:0,//持续时间 0持续展示
       });
@@ -102,20 +102,20 @@ export default {
       try {
         const { data } = await login(user)
         if(data.status === 400){
-          this.$toast.fail('手机号或验证码错误')
+          this.$toast.fail(this.$t('login.手机号或密码错误'))
         }else{
         console.log('登陆成功',data);
-        this.$toast.success('登陆成功')
+        this.$toast.success(this.$t('login.登陆成功'))
         this.$store.commit('setUser',data.data)
         this.$router.push('/home')
         }
       }
       catch (err) {
         if(err.response.status === 400){
-            this.$toast.fail('手机号或验证码错误')
+            this.$toast.fail(this.$t('login.手机号或密码错误'))
         }else{
             console.log('登陆失败',err);
-            this.$toast.fail('请稍后重试')
+            this.$toast.fail(this.$t('login.请稍后重试'))
         }
         
       }
@@ -125,17 +125,16 @@ export default {
       try{
         await this.$refs.loginForm.validate('mobile')
       }catch(err){
-        console.log('验证失败',err);
         return
       }
       this.isCountDownShow=true
       // 请求验证码
       try{
         await sendSms(this.user.mobile)
-        this.$toast('发送成功')
+        this.$toast(this.$t('login.发送成功'))
       }catch{
         console.log('发送失败',err);
-        this.$toast('发送失败')
+        this.$toast(this.$t('login.发送失败'))
         this.isCountDownShow=false
       }
 

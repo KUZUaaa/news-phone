@@ -2,8 +2,8 @@
     <div class="updata-photo">
         <img :src="img"  class="img" ref="image">
         <div class="toolbar">
-            <div class="cancel" @click="$emit('close')">取消</div>
-            <div class="confirm" @click="onConfirm">完成</div>
+            <div class="cancel" @click="$emit('close')">{{$t('my.取消')}}</div>
+            <div class="confirm" @click="onConfirm">{{$t('my.完成')}}</div>
         </div>
     </div>
     

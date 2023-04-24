@@ -1,8 +1,8 @@
 <template>
     <div class="channelEdit">
         <van-cell :border="false">
-            <div slot="title" class="titleText">我的频道</div>
-            <van-button slot="right-icon" class="edit-btn" type="warning" plain round size="mini" @click="isEdit=!isEdit">{{ isEdit? '完成':'编辑' }}</van-button>
+            <div slot="title" class="titleText">{{$t('my.我的频道')}}</div>
+            <van-button slot="right-icon" class="edit-btn" type="warning" plain round size="mini" @click="isEdit=!isEdit">{{ isEdit? this.$t('my.完成'):this.$t('my.编辑') }}</van-button>
         </van-cell>
         <van-grid :gutter="10">
             <van-grid-item class="gridItem" v-for="(channel,index) in channels" :key="index" @click="myChannelClick(channel,index)">
@@ -12,7 +12,7 @@
         </van-grid>
 
         <van-cell :border="false">
-            <div slot="title" class="titleText">频道列表</div>
+            <div slot="title" class="titleText">{{$t('my.频道列表')}}</div>
         </van-cell>
         <van-grid :gutter="10" class="tuijian">
             <van-grid-item icon="plus" class="gridItem" v-for="(channel,index) in tuijianChannels" :key="index" :text="channel.name" @click="addChannel(channel)"/>
@@ -72,7 +72,7 @@ export default {
                 this.allChannels = data.data.channels
                 // console.log(this.tuijianChannels);
             }catch(e){
-                this.$toast('获取文章列表失败')
+                this.$toast(this.$t('my.获取文章列表失败'))
             }
         },
        async addChannel(channel){
@@ -84,7 +84,7 @@ export default {
                     seq:this.channels.length
                 })
                 }catch(e){
-                    this.$toast('保存失败')
+                    this.$toast(this.$t('my.保存失败'))
                 }
             }else{
                 //未登录
@@ -111,7 +111,7 @@ export default {
                         try{
                             await deleteUserChannels(channel.id)
                         }catch(e){
-                            this.$toast('删除失败')
+                            this.$toast(this.$t('my.删除失败'))
                         }
                     }else{
                         //未登录

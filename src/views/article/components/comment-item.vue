@@ -27,7 +27,7 @@
             class="reply-btn"
             round
             @click="$emit('reply-click',comments)"
-          >回复 {{comments.reply_count}}</van-button>
+          >{{$t('my.回复')}} {{comments.reply_count}}</van-button>
         </div>
       </div>
     </van-cell>
@@ -102,7 +102,7 @@
       align-items: center;
     }
     .reply-btn {
-      width: 67px;
+      width: 74px;
       height: 24px;
       line-height: 24px;
       font-size: 10px;

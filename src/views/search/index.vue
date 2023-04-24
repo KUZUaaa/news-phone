@@ -6,7 +6,7 @@
                 class="search-form"
                 v-model="searchText"
                 show-action
-                placeholder="请输入搜索关键词"
+                :placeholder="this.$t('my.请输入搜索关键词')"
                 @search="onSearch"
                 @cancel="onCancel"
                 @focus="isResultShow = false"

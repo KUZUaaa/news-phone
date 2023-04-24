@@ -40,9 +40,9 @@ export default {
               await addLike(this.articleId)
               this.$emit('input',1)
             }
-            this.$toast(this.value==1?'取消点赞':'点赞成功')
+            this.$toast(this.value==1?this.$t('my.取消点赞'):this.$t('my.点赞成功'))
           }catch(e){
-            this.$toast('点赞或取消点赞失败')
+            this.$toast(this.$t('my.点赞或取消点赞失败'))
           } 
         }
     },

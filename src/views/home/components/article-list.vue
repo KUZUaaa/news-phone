@@ -4,9 +4,9 @@
             <van-list
             v-model="loading"
             :finished="finished"
-            finished-text="没有更多了"
+            :finished-text="this.$t('my.没有更多了')"
             :error.sync="error"
-            error-text="请求失败，点击重新加载"
+            :error-text="this.$t('my.请求失败，点击重新加载')"
             @load="onLoad"
             >
             <!-- <van-cell

@@ -7,7 +7,7 @@
         autosize
         type="textarea"
         maxlength="50"
-        placeholder="请输入留言"
+        :placeholder="this.$t('my.请输入留言')"
         show-word-limit
       />
       <van-button
@@ -54,9 +54,9 @@
           })
           this.message = ''
           this.$emit('postSuccess',data.data)
-          this.$toast.success('评论成功')
+          this.$toast.success(this.$t('my.评论成功'))
         }catch(e){
-          this.$toast('评论失败')
+          this.$toast(this.$t('my.评论失败'))
         }
       }
     }

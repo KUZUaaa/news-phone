@@ -1,19 +1,19 @@
 <template>
     <div class="comment-reply">
         <van-nav-bar
-        title="回复"
+        :title="this.$t('my.回复')"
         >
             <van-icon slot="left" name="cross" @click="$emit('close')"></van-icon>
         </van-nav-bar>
         <div class="scroll-wrap">
             <comment-item :comments="comment"/>
-            <van-cell title="全部回复"></van-cell>
+            <van-cell :title="this.$t('my.全部回复')"></van-cell>
             <comment-list :source="comment.com_id" :type="'c'" :list="commentList"/>
         </div>
         
       <!-- 回复评论底部按钮 -->
       <div class="post-wrap">
-        <van-button class="post-btn" size="small" round @click="isPostShow=true">写评论</van-button>
+        <van-button class="post-btn" size="small" round @click="isPostShow=true">{{$t('my.写评论')}}</van-button>
       </div>
       <!-- /回复评论底部按钮 -->
 

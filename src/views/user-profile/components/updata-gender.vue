@@ -1,7 +1,7 @@
 <template>
     <div class="updata-gender">
         <van-picker
-            title="修改性别"
+            :title="this.$t('my.修改性别')"
             show-toolbar
             :columns="columns"
             :default-index="+value"
@@ -24,7 +24,7 @@ export default {
     },
     data() {
         return {
-            columns:['男','女'],
+            columns:[this.$t('my.男'),this.$t('my.女')],
             newGender:this.value
         };
     },
@@ -45,9 +45,9 @@ export default {
                 })
                 this.$emit('close')
                 this.$emit('input',newGender)
-                this.$toast.success('修改成功')
+                this.$toast.success(this.$t('my.修改成功'))
             }catch(e){
-                this.$toast('修改性别失败')
+                this.$toast(this.$t('my.修改性别失败'))
             }
         }
     },

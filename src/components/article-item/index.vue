@@ -19,7 +19,7 @@
             </div>
             <div class="label-info-wrap">
                 <span>{{ article.aut_name }}</span>
-                <span>{{ article.comm_count }}评论</span>
+                <span>{{ article.comm_count }}{{this.$t('my.评论')}}</span>
                 <span>{{ article.pubdate }}</span>
             </div>
         </div>

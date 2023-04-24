@@ -5,7 +5,7 @@
               round
               size="small"
               @click="onFollow"
-            >已关注</van-button>
+            >{{$t('my.已关注')}}</van-button>
             <van-button
             v-else
               class="follow-btn"
@@ -15,7 +15,7 @@
               size="small"
               icon="plus"
               @click="onFollow"
-            >关注</van-button>
+            >{{$t('my.关注')}}</van-button>
 </template>
 
 <script>
@@ -51,7 +51,7 @@ export default {
             }else{
               const {data} = await addFollow(this.userId)
               if(data.status ==400){
-                this.$toast('不能关注自己哦')
+                this.$toast(this.$t('my.不能关注自己哦'))
                 // this.$toast('关注失败')
                 return
               }else{
@@ -61,8 +61,8 @@ export default {
             }
           }catch(e){
             if(this.errStatus.response && this.errStatus.response.status === 400)
-            this.$toast('不能关注自己哦')
-            this.$toast('关注失败')
+            this.$toast(this.$t('my.不能关注自己哦'))
+            this.$toast(this.$t('my.关注失败'))
           }
         },
     },

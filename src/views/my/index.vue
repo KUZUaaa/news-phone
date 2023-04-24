@@ -4,7 +4,7 @@
         <div class="header not-login" v-if="!user">
             <div class="login-btn" @click="$router.push('/login')">
                 <img src="@/assets/mobile.png" class="mobile-img">
-                <span class="text">登录</span>
+                <span class="text">{{$t('my.登录')}}</span>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
                     round
                     class="bjBtn"
                     to="/user/profile">
-                      编辑资料
+                      {{$t('my.编辑资料')}}
                     </van-button>   
                 </div>
                 
@@ -35,19 +35,19 @@
             <div class="data-stats">
                 <div class="data-item">
                     <span class="count">{{ userInfo.art_count }}</span>
-                    <span class="text">头条</span>
+                    <span class="text">{{$t('my.头条')}}</span>
                 </div>
                 <div class="data-item">
                     <span class="count">{{ userInfo.follow_count }}</span>
-                    <span class="text">关注</span>
+                    <span class="text">{{$t('my.关注')}}</span>
                 </div>
                 <div class="data-item">
                     <span class="count">{{ userInfo.fans_count }}</span>
-                    <span class="text">粉丝</span>
+                    <span class="text">{{$t('my.粉丝')}}</span>
                 </div>
                 <div class="data-item">
                     <span class="count">{{ userInfo.like_count }}</span>
-                    <span class="text">获赞</span>
+                    <span class="text">{{$t('my.获赞')}}</span>
                 </div>
             </div>
         </div>
@@ -55,31 +55,49 @@
         <van-grid :column-num="2" class="grid-nav" clickable>
             <van-grid-item icon="photo-o" text="文字" class="grid-item">
                 <i slot="icon" class="iconfont icon-shoucang"></i>
-                <span slot="text" class="text">收藏</span>
+                <span slot="text" class="text">{{$t('my.收藏')}}</span>
             </van-grid-item>
             <van-grid-item icon="photo-o" text="文字" class="grid-item">
                 <i slot="icon" class="iconfont icon-lishi"></i>
-                <span slot="text" class="text">历史</span>
+                <span slot="text" class="text">{{$t('my.历史')}}</span>
             </van-grid-item>
         </van-grid>
 
         <!-- 列表 -->
-        <van-cell title="消息通知" is-link class="cell-msg"/>
-        <van-cell title="退出登陆" class="btn-logout" v-if="user" @click="onlogout" clickable/>
+        <van-cell :title="this.$t('my.消息通知')" is-link class="cell-msg"/>
+        <van-cell :title="this.$t('my.语言')" is-link class="cell-msg" @click="languageFlag=true"/>
+        <van-cell :title="this.$t('my.退出登陆')" class="btn-logout" v-if="user" @click="onlogout" clickable/>
 
+        <!-- 语言切换弹出层 -->
+        <van-popup  v-model="languageFlag" style="height: 100%;" position="bottom">
+            <van-picker
+            :title="this.$t('my.语言')"
+            v-if="languageFlag"
+            @close="languageFlag = false"
+            show-toolbar
+            :columns="columns"
+            @confirm="onConfirm"
+            @cancel="onCancel"
+            />
+        </van-popup>
     </div>
   </template>
   
   <script>
     import { mapState } from 'vuex';
     import { getUserInfo } from '@/api/user';
+    import {getItem,setItem,removeItem} from '@/utils/storage'
+    import { Locale } from 'vant';
+    import enUS from 'vant/es/locale/lang/en-US';
+    import zhCN from 'vant/lib/locale/lang/zh-CN'
     export default {
       name: 'MyIndex',
       data() {
         return {
             userInfo:{ },
-
-
+            languageFlag:false,
+            columns: ['中文','English'],
+            language:'中文'
         }
       },
       created(){
@@ -91,9 +109,26 @@
         ...mapState(['user'])
       } ,
       methods: {
+        onConfirm(value, index) {
+            if(index == 0){
+                this.languageFlag =false
+                setItem('LANGUAGE','zh')
+                Locale.use('zh-CN', zhCN)
+                return this.$i18n.locale = getItem('LANGUAGE')
+            }
+            if(index == 1){
+                this.languageFlag =false
+                setItem('LANGUAGE','en')
+                Locale.use('en-US', enUS)
+                return this.$i18n.locale = getItem('LANGUAGE')
+            }
+        },
+        onCancel() {
+            this.languageFlag =false
+        },
         onlogout (){
             this.$dialog.confirm({
-                title: '是否退出登陆'
+                title: this.$t('my.是否退出登陆')
             })
             .then(() => {
                 // on confirm
@@ -109,7 +144,7 @@
                 const { data } = await getUserInfo()
                 this.userInfo=data.data
             }catch(err){
-                this.$toast('加载失败')
+                this.$toast(this.$t('my.加载失败'))
                 console.log(err);
             }
         }
