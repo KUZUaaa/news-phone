@@ -4,7 +4,6 @@ import axios from 'axios'
 import store from '@/store';
 
 const request = axios.create({
-    // baseURL: 'http://toutiao.itheima.net' //基地址
     baseURL: 'http://127.0.0.1:3007' //基地址
 })
 

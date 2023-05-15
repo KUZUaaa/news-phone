@@ -114,3 +114,13 @@ export const updataUserProfileImage = (data) => {
         data
     })
 }
+
+// 发布文章
+
+export const artRelease = (data) => {
+    return request({
+        url: `/v1_0/user/release`,
+        method: 'post',
+        data
+    })
+}

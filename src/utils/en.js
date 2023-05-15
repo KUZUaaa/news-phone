@@ -97,8 +97,21 @@ const en = {
         关注失败: 'Followed Failure',
         取消点赞: 'Unlike Success',
         点赞成功: 'Like Success',
-        点赞或取消点赞失败: 'Operation Failure'
-
+        点赞或取消点赞失败: 'Operation Failure',
+        收藏: 'Collected Articles',
+        历史: 'History',
+        关注: 'Followed',
+        我的文章: 'My Articles',
+        发布文章: 'Release News',
+        返回: 'Back',
+        标题: 'Title',
+        分区: 'Channel',
+        内容: 'Content',
+        请输入内容: 'Enter content',
+        发布: 'Public',
+        上传成功: 'Public successfully',
+        上传失败: 'Public failure',
+        审核文章: 'Audit'
     }
 }
 export default en;

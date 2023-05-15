@@ -59,6 +59,42 @@ const routes = [{
         component: () =>
             import ('@/views/user-profile'),
     },
+    {
+        path: '/collected',
+        name: 'Collected',
+        component: () =>
+            import ('@/views/collected'),
+    },
+    {
+        path: '/history',
+        name: 'History',
+        component: () =>
+            import ('@/views/history'),
+    },
+    {
+        path: '/followed',
+        name: 'Followed',
+        component: () =>
+            import ('@/views/follow'),
+    },
+    {
+        path: '/fans',
+        name: 'Fans',
+        component: () =>
+            import ('@/views/fans'),
+    },
+    {
+        path: '/myArticles',
+        name: 'MyArticles',
+        component: () =>
+            import ('@/views/myArticles'),
+    },
+    {
+        path: '/release',
+        name: 'Release',
+        component: () =>
+            import ('@/views/release'),
+    },
 ]
 
 const router = new VueRouter({

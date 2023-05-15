@@ -33,15 +33,15 @@
                 
             </div>
             <div class="data-stats">
-                <div class="data-item">
+                <div class="data-item" @click="linkToMy">
                     <span class="count">{{ userInfo.art_count }}</span>
                     <span class="text">{{$t('my.头条')}}</span>
                 </div>
-                <div class="data-item">
+                <div class="data-item" @click="linkToFollowed">
                     <span class="count">{{ userInfo.follow_count }}</span>
                     <span class="text">{{$t('my.关注')}}</span>
                 </div>
-                <div class="data-item">
+                <div class="data-item" @click="linkToFans">
                     <span class="count">{{ userInfo.fans_count }}</span>
                     <span class="text">{{$t('my.粉丝')}}</span>
                 </div>
@@ -53,18 +53,19 @@
         </div>
         <!-- 导航 -->
         <van-grid :column-num="2" class="grid-nav" clickable>
-            <van-grid-item icon="photo-o" text="文字" class="grid-item">
+            <van-grid-item icon="photo-o" text="文字" class="grid-item" to="/collected">
                 <i slot="icon" class="iconfont icon-shoucang"></i>
                 <span slot="text" class="text">{{$t('my.收藏')}}</span>
             </van-grid-item>
-            <van-grid-item icon="photo-o" text="文字" class="grid-item">
+            <van-grid-item icon="photo-o" text="文字" class="grid-item" to="/history">
                 <i slot="icon" class="iconfont icon-lishi"></i>
                 <span slot="text" class="text">{{$t('my.历史')}}</span>
             </van-grid-item>
         </van-grid>
 
         <!-- 列表 -->
-        <van-cell :title="this.$t('my.消息通知')" is-link class="cell-msg"/>
+        <van-cell :title="this.$t('my.审核文章')" is-link class="cell-msg" to="/audit" v-if="userInfo.is_admin&&user"/>
+        <van-cell :title="this.$t('my.发布文章')" is-link class="cell-msg" to="/release"/>
         <van-cell :title="this.$t('my.语言')" is-link class="cell-msg" @click="languageFlag=true"/>
         <van-cell :title="this.$t('my.退出登陆')" class="btn-logout" v-if="user" @click="onlogout" clickable/>
 
@@ -109,6 +110,15 @@
         ...mapState(['user'])
       } ,
       methods: {
+        linkToMy(){
+            this.$router.push('/myArticles')
+        },
+        linkToFollowed(){
+            this.$router.push('/followed')
+        },
+        linkToFans(){
+            this.$router.push('/fans')
+        },
         onConfirm(value, index) {
             if(index == 0){
                 this.languageFlag =false
