@@ -111,7 +111,9 @@ const en = {
         发布: 'Public',
         上传成功: 'Public successfully',
         上传失败: 'Public failure',
-        审核文章: 'Audit'
+        审核文章: 'Audit',
+        不通过: 'refuse',
+        通过: 'pass'
     }
 }
 export default en;

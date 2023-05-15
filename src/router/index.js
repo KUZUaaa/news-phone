@@ -54,6 +54,13 @@ const routes = [{
         props: true, //路由传参直接用props接收articleId
     },
     {
+        path: '/auditArticle/:articleId',
+        name: 'auditArticle',
+        component: () =>
+            import ('@/views/auditArticle'),
+        props: true, //路由传参直接用props接收articleId
+    },
+    {
         path: '/user/profile',
         name: 'userProfile',
         component: () =>
@@ -94,6 +101,12 @@ const routes = [{
         name: 'Release',
         component: () =>
             import ('@/views/release'),
+    },
+    {
+        path: '/audit',
+        name: 'Audit',
+        component: () =>
+            import ('@/views/audit'),
     },
 ]
 

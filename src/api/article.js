@@ -37,6 +37,15 @@ export const getMyArticle = (params) => {
     })
 }
 
+// 获取未审核的文章audit列表数据
+export const getAuditArticle = (params) => {
+    return request({
+        method: 'GET',
+        url: '/V1_0/user/auditArticles',
+        params
+    })
+}
+
 // 获取用户关注列表
 export const getUserFollowed = (params) => {
     return request({
@@ -58,6 +67,22 @@ export const getArticleById = (article_id) => {
     return request({
         method: 'GET',
         url: `/v1_0/articles/${article_id}`,
+    })
+}
+
+// 文章审核通过
+export const articlePass = (article_id) => {
+    return request({
+        method: 'GET',
+        url: `/v1_0/auditPassArticles/${article_id}`,
+    })
+}
+
+// 文章审核未通过Refuse
+export const articleRefuse = (article_id) => {
+    return request({
+        method: 'GET',
+        url: `/v1_0/auditRefuseArticles/${article_id}`,
     })
 }
 
