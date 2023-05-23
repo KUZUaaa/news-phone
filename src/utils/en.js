@@ -113,7 +113,9 @@ const en = {
         上传失败: 'Public failure',
         审核文章: 'Audit',
         不通过: 'refuse',
-        通过: 'pass'
+        通过: 'pass',
+        无待审核文章: 'None',
+        待审核文章: 'audit article',
     }
 }
 export default en;

@@ -31,11 +31,12 @@ export const regest = (data) => {
 
 // 发送验证码
 
-export const sendSms = () => {
+export const sendSms = (data) => {
     return request({
         // url: `/v1_0/sms/codes/${mobile}`,
         url: `/api/sms/codes`,
-        method: 'get'
+        method: 'get',
+        data
     })
 }
 
@@ -45,10 +46,6 @@ export const getUserInfo = () => {
     return request({
         url: `/v1_0/user`,
         method: 'get'
-            // 写在请求拦截器里
-            // headers:{
-            //     Authorization: `Bearer ${store.state.user.token}`
-            // }
     })
 }
 
@@ -58,10 +55,6 @@ export const getUserChannels = () => {
     return request({
         url: `/v1_0/user/channels`,
         method: 'get'
-            // 写在请求拦截器里
-            // headers:{
-            //     Authorization: `Bearer ${store.state.user.token}`
-            // }
     })
 }
 

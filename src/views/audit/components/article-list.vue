@@ -4,9 +4,9 @@
             <van-list
             v-model="loading"
             :finished="finished"
-            :finished-text="this.$t('my.没有更多了')"
+            :finished-text="this.$t('my.无待审核文章')"
             :error.sync="error"
-            :error-text="this.$t('my.没有更多了')"
+            :error-text="this.$t('my.无待审核文章')"
             @load="onLoad"
             >
             <!-- <van-cell

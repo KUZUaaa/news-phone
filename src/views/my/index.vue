@@ -166,8 +166,9 @@
   .my-container{
     .header{
         height: 201px;
-        background-image: url(@/assets/banner.png) ;
+        background-image: url(@/assets/banner.jpg) ;
         background-size: contain;
+        background-size: cover;
     }
     // 未登陆头图
     .not-login{
